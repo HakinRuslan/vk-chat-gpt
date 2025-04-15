@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заявка</title>
+    <style>
+        body {
+            background-color: #fff;
+            font-family: Helvetica, Arial, sans-serif;
+            color: #555;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .divider {
+            border-top: 2px solid #555;
+            margin: 20px 0;
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 25px;
+            margin: 50px 0;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .small-text {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="divider"></div>
+        <p style="font-size: 16px;">Вам пришла заявка..</p>
+        <div class="divider">
+            <h3>{{ appls }}</h3>
+        </div>
+    </div>
+</body>
+</html>

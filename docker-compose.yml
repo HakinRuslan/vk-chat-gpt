@@ -1,0 +1,48 @@
+services: 
+  nginx:
+    image: nginx
+    ports:
+     - "443:443"
+     - "80:80"
+    volumes:
+
+    #  - /etc/letsencrypt/live/trepetnoclub.com:/etc/letsencrypt
+     - /opt/ssl:/opt/ssl
+     - ./conf:/etc/nginx/conf.d
+     - ./conf2:/opt/ssl2
+  webhook:
+    hostname: fastapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: webhook
+    # ports:
+    #   - "127.0.0.1:4242:4242"
+
+    #   - "8080:8000"
+  redis:
+    image: redis:7.2.5
+    container_name: redis_cont_two
+    environment:
+      - REDIS_PASSWORD=redispass
+    ports:
+      - "6379:6380"
+    volumes:
+      - ./redisdata:/data
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+        reservations:
+          cpus: "0.25"
+          memory: 256M
+    command: >
+      sh -c '
+        mkdir -p /usr/local/etc/redis &&
+        echo "bind 0.0.0.0" > /usr/local/etc/redis/redis.conf &&
+        echo "requirepass $${REDIS_PASSWORD}" >> /usr/local/etc/redis/redis.conf &&
+        echo "appendonly yes" >> /usr/local/etc/redis/redis.conf &&
+        echo "appendfsync everysec" >> /usr/local/etc/redis/redis.conf &&
+        redis-server /usr/local/etc/redis/redis.conf
+      '

@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+loguru
+aiohttp
+redis
+openai
+loguru
+pip
+pydantic-settings
+pydantic
+redis
+setuptools
+Jinja2
+passlib
+emails
